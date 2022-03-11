@@ -1,0 +1,15 @@
+<script>
+var token = '68d2e22927ae92797ec6f5d9c1f00bc4accac963;
+var url = 'https://developers.pipedrive.com/docs/api/v1/deals'
++ '?api_token=' + token
++ '&limit=500';
+var deals = [];
+var start = 0;
+do {
+   var response = JSON.parse(UrlFetchApp.fetch(url + '&start=' + start));
+   deals = deals.concat(response.data);
+   if(response.additional_data.pagination.more_items_in_collection){
+      start = response.additional_data.pagination.next_start;
+   }
+} while(response.additional_data.pagination.more_items_in_collection);
+</script>
